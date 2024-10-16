@@ -1,80 +1,116 @@
 local wezterm = require 'wezterm'
+local main = {}
 
--- Window frame configuration
-local window_frame = {
-	font = wezterm.font({ family = "JetBrainsMono Nerd Mono", weight = "Bold" }),
-	font_size = 11.5,
-	active_titlebar_bg = "#3A3E4B",
-	inactive_titlebar_bg = "#1E1E24",
-	active_titlebar_fg = "#C0D6E0",
-	inactive_titlebar_fg = "#A1B1C4",
-	inactive_titlebar_border_bottom = "#1E1E24",
-	active_titlebar_border_bottom = "#3A3E4B",
-	button_fg = "#f8f8f2",
-	button_bg = "#44475a",
-	button_hover_fg = "#ffffff",
-	button_hover_bg = "#6272a4",
-	border_left_width = '0cell',
-	border_right_width = '0cell',
-	border_bottom_height = '0cell',
-	border_top_height = '0cell',
+local main_palette = {
+	["000000"] = '#1E1E24',
+	["000001"] = '#2D2D35',
+	["000010"] = '#3A3E4B',
+	["000011"] = '#5E646D',
+	["000100"] = '#4B3D5B',
+	["000101"] = '#5C4A77',
+	["000110"] = '#A6488D',
+	["000111"] = '#D22B50',
+	["001000"] = '#D76D31',
+	["001001"] = '#B3A45E',
+	["001010"] = '#7B8D1C',
+	["001011"] = '#5A9F5D',
+	["001100"] = '#47B3D0',
+	["001101"] = '#B5B94D',
+	["001110"] = '#C7A1B8',
+	["001111"] = '#D2C0D1',
+	["010000"] = '#C0D6E0',
+	["010001"] = '#83B0C2',
+	["010010"] = '#A8D8F6',
+	["010011"] = '#4F5C5D',
+	["010100"] = '#E4B38D',
+	["010101"] = '#D4D8DB',
+	["010110"] = '#D3C6FF',
+	["010111"] = '#A1B1C4',
+	["011000"] = '#E0E6EA',
+	["011001"] = '#F2E0E0',
+	["011010"] = '#FFE7A3',
+	["011011"] = '#C0E6F4',
+	["011100"] = '#C37EB5',
+	["011101"] = '#B8C7D4',
+	["011110"] = '#F5B4C7',
+	["011111"] = '#ffffff',
 }
 
--- Define your Cirqla theme colors
-local themes = {
-	cirqla_x = {
-		colors = {
-			foreground = "#D6DBDF",
-			background = "#1E1E24",
-			cursor_bg = "#C25095",
-			cursor_border = "#D55B71",
-			cursor_fg = "#FFFFFF",
-			selection_bg = "#5A9F5D",
-			selection_fg = "#1E1E24",
-			ansi = {
-				"#1E1E24", -- Black
-				"#D22B50", -- Red
-				"#54C5E0", -- Green
-				"#E27A4F", -- Yellow
-				"#8E6D9B", -- Blue
-				"#C25095", -- Magenta
-				"#47B3D0", -- Cyan
-				"#D6DBDF", -- White
-			},
-			brights = {
-				"#C0D6E0", -- Bright Black
-				"#D4A6C5", -- Bright Red
-				"#B3E5D5", -- Bright Green
-				"#E9C88B", -- Bright Yellow
-				"#A1B1C4", -- Bright Blue
-				"#D8B6FF", -- Bright Magenta
-				"#F3F7F9", -- Bright Cyan
-				"#F5A9D3", -- Bright White
-			},
+local main_active_tab = {
+	bg_color = main_palette["000001"],
+	fg_color = main_palette["011111"],
+}
+
+local main_inactive_tab = {
+	bg_color = main_palette["000000"],
+	fg_color = main_palette["000011"],
+}
+
+function main.colors()
+	return {
+		foreground = main_palette["011111"],
+		background = main_palette["000000"],
+		cursor_bg = main_palette["010001"],
+		cursor_border = main_palette["010001"],
+		cursor_fg = main_palette["011111"],
+		selection_bg = main_palette["000010"],
+		selection_fg = main_palette["011111"],
+
+		ansi = {
+			main_palette["000000"],
+			main_palette["000111"],
+			main_palette["001100"],
+			main_palette["001000"],
+			main_palette["001011"],
+			main_palette["000101"],
+			main_palette["001110"],
+			main_palette["011111"],
 		},
-		window_frame = window_frame,
-	},
+
+		brights = {
+			main_palette["001111"],
+			main_palette["000111"],
+			main_palette["001100"],
+			main_palette["001000"],
+			main_palette["001011"],
+			main_palette["000101"],
+			main_palette["001110"],
+			main_palette["011111"],
+		},
+
+		tab_bar = {
+			background = main_palette["000000"],
+			active_tab = main_active_tab,
+			inactive_tab = main_inactive_tab,
+			inactive_tab_hover = main_active_tab,
+			new_tab = main_inactive_tab,
+			new_tab_hover = main_active_tab,
+			inactive_tab_edge = main_palette["000011"], -- (Fancy tab bar only)
+		},
+	}
+end
+
+function main.window_frame() -- (Fancy tab bar only)
+	return {
+		font = wezterm.font({ family = "JetBrainsMono Nerd Mono", weight = "Bold" }),
+		font_size = 11.5,
+		active_titlebar_bg = main_palette["000000"],
+		inactive_titlebar_bg = main_palette["000000"],
+		active_titlebar_fg = main_palette["011000"],
+		inactive_titlebar_fg = main_palette["010111"],
+		inactive_titlebar_border_bottom = main_palette["000000"],
+		active_titlebar_border_bottom = main_palette["000011"],
+		button_fg = main_palette["011001"],
+		button_bg = main_palette["000011"],
+		button_hover_fg = main_palette["011111"],
+		button_hover_bg = main_palette["010001"],
+		border_left_width = '0cell',
+		border_right_width = '0cell',
+		border_bottom_height = '0cell',
+		border_top_height = '0cell',
+	}
+end
+
+return {
+	cirqla_x = main
 }
-
-local M = {}
-
--- Load the theme specified by the user or use 'cirqla_x' as the default
-local function load_theme(theme_name)
-	return themes[theme_name] or themes.cirqla_x -- Use default if not found
-end
-
--- Set the default variant
-M.variant = "cirqla_x"
-local theme = load_theme(M.variant)
-
-M.colors = theme.colors
-M.window_frame = theme.window_frame
-
-function M.setup(config)
-	config.colors = M.colors
-	config.window_frame = M.window_frame
-	config.command_palette_bg_color = M.colors.background
-	config.command_palette_fg_color = M.colors.foreground
-end
-
-return M
