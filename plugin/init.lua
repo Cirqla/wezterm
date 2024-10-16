@@ -1,4 +1,4 @@
-local cirqla = {}
+local wezterm = require 'wezterm'
 
 -- Window frame configuration
 local window_frame = {
@@ -52,28 +52,23 @@ local themes = {
 				"#F5A9D3", -- Bright White
 			},
 		},
-		window_frame = window_frame
+		window_frame = window_frame,
 	},
 }
-
-local wezterm = require 'wezterm'
 
 local M = {}
 
 -- Load the theme specified by the user or use 'cirqla_x' as the default
 local function load_theme(theme_name)
-	local success, theme = pcall(require, "themes." .. theme_name)
-	if not success then
-		wezterm.log_error("Could not load theme '" .. theme_name .. "': " .. theme)
-		return require("themes.cirqla_x") -- Fallback to the default theme
-	end
-	return theme
+	return themes[theme_name] or themes.cirqla_x -- Use default if not found
 end
 
--- Default theme
+-- Set the default variant
 M.variant = "cirqla_x"
-M.colors = load_theme(M.variant).colors
-M.window_frame = load_theme(M.variant).window_frame()
+local theme = load_theme(M.variant)
+
+M.colors = theme.colors
+M.window_frame = theme.window_frame
 
 function M.setup(config)
 	config.colors = M.colors
