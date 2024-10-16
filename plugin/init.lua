@@ -1,4 +1,4 @@
-local wezterm = require 'wezterm'
+local cirqla = {}
 
 -- Window frame configuration
 local window_frame = {
@@ -56,16 +56,6 @@ local themes = {
 	},
 }
 
--- Select the theme based on the environment variable
-local theme_var = os.getenv("WEZTERM_THEME") or "cirqla_x"  -- Default to cirqla_x if not set
-local selected_theme = themes[theme_var] or themes.cirqla_x -- Fallback to cirqla_x if invalid
-
--- WezTerm configuration
-local config = {
-	colors = selected_theme.colors,
-	font = wezterm.font("JetbrainsMono Nerd Font"),
-	window_frame = selected_theme.window_frame,
+return {
+	cirqla_x = themes.cirqla_x
 }
-
--- Set the config
-return config

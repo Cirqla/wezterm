@@ -41,17 +41,13 @@ return config
 -- theme.lua
 local wezterm = require("wezterm")
 local cirqla = wezterm.plugin.require("https://github.com/Cirqla/wezterm")
-local colors = cirqla.colors()
+local variant = cirqla.cirqla_x
 
 local M = {}
 
-cirqla.variant = "cirqla_x"
-
 function M.setup(config)
-	config.colors = colors
-	config.window_frame = cirqla.window_frame()
-	config.command_palette_bg_color = colors.background
-	config.command_palette_fg_color = colors.foreground
+	config.colors = variant.colors
+	config.window_frame = variant.window_frame
 end
 
 return M
