@@ -7,7 +7,7 @@ The **Cirqla WezTerm Theme** provides a collection of themes for WezTerm, enhanc
 
 - Multiple themes available:
   - Cirqla X
-  -- coming soon options are:
+  - coming soon options are:
   - Cirqla X Light
   - Cirqla Dot
   - Cirqla Dot Light
@@ -59,7 +59,7 @@ return M
 
 ## Usage
 
-To change the theme, modify the `theme_name` variable in the configuration file to any of the available themes (e.g., `"cirqla_dot"`).
+To change the theme, modify the `variant` variable in the configuration file to any of the available themes (e.g., `"cirqla_dot"`).
 
 ## Window Frame Options
 
