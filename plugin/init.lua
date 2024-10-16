@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 local cirqla = {}
 
 -- Window frame configuration
@@ -57,10 +56,6 @@ local themes = {
 	},
 }
 
-return {
-	cirqla_x = themes.cirqla_x
-}
-=======
 local wezterm = require 'wezterm'
 
 local M = {}
@@ -88,4 +83,3 @@ function M.setup(config)
 end
 
 return M
->>>>>>> e6312a3 (Fix not loading file | moved init.lua to plugin/init.lua)
