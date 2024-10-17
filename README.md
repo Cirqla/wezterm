@@ -46,8 +46,8 @@ local variant = cirqla.cirqla_x
 local M = {}
 
 function M.setup(config)
-	config.colors = variant.colors
-	config.window_frame = variant.window_frame
+	config.colors = variant.colors()
+	config.window_frame = variant.window_frame()
 end
 
 return M
